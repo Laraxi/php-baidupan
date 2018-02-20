@@ -2,76 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab47d279-2330-4a2c-a993-1837dbdb79df" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Public/index/css/amazeui.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Public/index/images/logo.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Public/index/js/amazeui.lazyload.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Public/index/js/amazeui.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Public/index/js/jquery.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Public/index/js/layer.min.js" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php" afterPath="$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php" />
-      <change beforePath="$PROJECT_DIR$/Application/Runtime/Logs/Admin/18_02_19.log" afterPath="$PROJECT_DIR$/Application/Runtime/Logs/Admin/18_02_19.log" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/.idea/laravel-news.com.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/.idea/modules.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/.idea/workspace.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/blog.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/blog_detail.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/contact.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/css/all.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/css/font-face.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/images/icon-arrow-down.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/js/adsbygoogle.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/js/app.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/js/jquery.min.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/list.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/list_detail.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/11bf480409344299bc76787a8e10686d.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/20720528a8a5464a811b322ccb228335.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/3e4b3cfed5ec429aa21ddd46308816b1.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/63db73c8ac064f75bd9563fe44221c12.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/79d7b3ff76734b348c6694056141f103.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/assert-json-fragment.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/blade-prepend.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/blade-prepend_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/botman-playground.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/castle.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/castle_1.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/codeship_400.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/collections-when.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/create-helper-functions.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/cyclomaticcomplexity.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/dark-ln-elephant.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/dark-ln-elephant_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/eager-loading-basics.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/github-laravel-blade1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/github-laravel-blade1_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/homestead-add-custom-aliases.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/icon-newsletter.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/jquery-to-vue-js.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-5.6.3.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-5.6.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-collection-tap.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-config-beginner.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-debugbar1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-model-caching-package.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-model-caching.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-model-factories.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-redirectto.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-tagging.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/laravel-tinker-artisan-command.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/logo-laratalent.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/nexmo-laravel-sms.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/nexmo.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/spark6.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/statsd.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/testing-middleware.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/testing-with-phpspec.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/text-to-speech.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/underconstruction.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/vue-spa-with-laravel.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/vue-wrapper-comonent-featured.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/your-first-laravel-app-leader.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/laravel-news.com/picture/zaengle-logo.png" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -88,8 +20,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+            <state relative-caret-position="74">
+              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -255,12 +187,12 @@
       <workItem from="1519023048944" duration="114000" />
       <workItem from="1519023178008" duration="17612000" />
       <workItem from="1519091350395" duration="9893000" />
-      <workItem from="1519108014984" duration="624000" />
+      <workItem from="1519108014984" duration="945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28427000" />
+    <option name="totallyTimeSpent" value="28748000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -661,8 +593,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+        <state relative-caret-position="74">
+          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
           <folding />
         </state>
       </provider>
