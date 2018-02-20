@@ -38,7 +38,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        session(null);
+        session('admin_login', null);
         $this->redirect('index');
     }
 

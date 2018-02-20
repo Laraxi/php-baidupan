@@ -67,7 +67,8 @@ class UserController extends Controller
 
     public function logout()
     {
-        session(null);
+        session('home_login_id',null);
+        session('home_login_username',null);
         $this->redirect('index/index');
     }
 

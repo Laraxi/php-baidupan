@@ -737,13 +737,13 @@
         short = short.replace(/^\s*[\r\n]/gm, '');
         short = short.replace(/[ \t\r\f\v]/g, '');
         var shortArr = short.split('\n');
-        //console.log(shortArr);
+        // console.log(shortArr);
         //alert(shortArr)
         // ----以行转换成数组 --end
 
         $.ajax({
             type: "post",
-            url: "index.php?action=share&do=add",
+            url: "<?= U('share/add') ?>",
             data: "short=" + shortArr,
             async: false,
             cache: false,
@@ -762,34 +762,12 @@
                 }
                 if (data.status == 202) {
                     layer.confirm(data.msg, {icon: 0, title: '提示'}, function (index) {
-                        window.location.href = "?action=member&do=login";
+                        window.location.href = "<?= U('user/login') ?>";
                         layer.close(index);
                     });
                 }
             }
         });
-    });
-
-    function tips_pull() {
-        $.ajax({
-            type: "post",
-            url: "index.php?action=member&do=ajaxloginprize",
-            async: false,
-            cache: false,
-            dataType: "json",
-            success: function (data) {
-                if (data.msg == 'OK') {
-                    var msg = '<span style="font-size:12px;">每天登录赠送</span> <span class="am-badge am-badge-danger am-radius">金币+3</span><br/>';
-                    layer.alert(msg, {title: '消息提示'}, function (index) {
-                        layer.close(index);
-                    });
-                }
-            }
-        });
-    }
-
-    $(function () {
-        tips_pull();
     });
 </script>
 </body>
