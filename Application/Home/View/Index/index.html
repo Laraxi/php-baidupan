@@ -1,0 +1,796 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>网盘分享 - 百度云盘群组分享，群组链接资源实时更新数据！</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="__PUBLIC__/index/css/amazeui.min.css">
+    <link rel="stylesheet" href="http://bdwp.nowlm.com/tpl/js/skin/layer.css">
+    <script src="__PUBLIC__/index/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/index/js/amazeui.min.js"></script>
+    <script src="__PUBLIC__/index/js/amazeui.lazyload.min.js"></script>
+    <script src="__PUBLIC__/index/js/layer.min.js"></script>
+</head>
+<body>
+<style>
+    .am-g-fixed {
+        max-width: 1200px;
+    }
+
+    a {
+        color: #333333
+    }
+
+    .login-status {
+        float: right;
+        color: #333333;
+        font-size: 14px;
+        padding-top: 20px;
+    }
+
+    .login-status a {
+        color: #333333;
+    }
+
+    #post-share-box {
+        display: none;
+    }
+</style>
+<style>
+    footer a {
+        color: #333;
+    }
+
+    .tj {
+        display: none;
+    }
+</style>
+
+<header class="am-topbar am-topbar-inverse" style="background:#FFF; border-bottom:1px solid #eee; height:65px;">
+    <div class="am-container am-g-fixed">
+        <h1 class="am-topbar-brand" style="margin-left:-10px;">
+            <a href="/" class="am-text-ir"><img src="__PUBLIC__/index/images/logo.jpg" width="330" height="55"
+                                                border="0">网盘分享 -
+                百度云盘群组分享</a>
+        </h1>
+        <div class="login-status">
+            <?php if(session('home_login_id')): ?>
+
+            <a>欢迎你：<span style="color: red"><?= session('home_login_username') ?></span> </a>
+            <a href="<?= U('user/logout') ?>" class="am-icon-sign-in"> 退出</a>
+            <?php else: ?>
+            <span style="padding-right:5px;"> 登录免费分享群组链接，马上只需1秒!  </span>
+            <a target="_blank" href="<?= U('user/register') ?>" class="am-icon-sign-in"> 注册</a>
+            <a target="_blank" href="<?= U('user/login') ?>" class="am-icon-sign-in"> 登录</a>
+            <?php endif; ?>
+
+        </div>
+    </div>
+</header>
+<div class="am-g am-g-fixed">
+    <div class="am-u-sm-12" style="margin-top:-10px;">
+        <div style="float:left; margin-top:5px;"><i class="am-icon-bar-chart"></i> 群组链接：<b>19</b> 条，最后更新：<b>2017-11-17
+            01:33:30</b></div>
+        <div style="float:right; margin-bottom:10px;">
+            <button type="button" id="add-share" class="am-btn am-btn-warning am-radius"><i
+                    class="am-icon-share-alt-square"></i> 免费快速分享群组链接
+            </button>
+            <!--button type="button" onclick="location='/my/member'" class="am-btn am-btn-success am-radius"><i class="am-icon-vimeo"></i> 升级会员</button-->
+        </div>
+    </div>
+    <div class="am-u-sm-12" id="post-share-box">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd">
+                <h3 class="am-panel-title">免费快速分享百度云群组链接</h3>
+            </div>
+            <form class="am-form">
+                <fieldset>
+                    <div class="am-form-group" style="margin-top: 0px;">
+                        <label for="doc-ta-1"
+                               style="font-size:14px;">请在下面的输入框粘贴有效的百度云群组链接，可分享你自己创建或其它群的邀请链接</label><br/>
+                        <label for="doc-ta-1"
+                               style="font-size:14px;color:#f00;">声明：严禁分享存在违规内容的百度网盘群组链接，一经发现，一律删除！</label>
+                        <textarea class="" rows="8" id="post-share-content"
+                                  placeholder="请粘贴完整的百度群组链接，例如：https://pan.baidu.com/mbox/homepage?short=..."></textarea>
+                    </div>
+
+                    <p style="margin-bottom:-15px;">
+                        <button type="button" id="post-share" class="am-btn am-btn-warning am-radius">提交分享</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="am-u-sm-12">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd" style="border-bottom:none;">
+
+                <h3 class="am-panel-title">最新百度云群组</h3>
+            </div>
+            <table class="am-table am-table-striped am-table-hover">
+                <thead>
+                <!--tr>
+                    <th></th>
+                    <th></th>
+                </tr-->
+                </thead>
+                <tbody>
+                <tr onclick="go('59')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/3927aa29.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/effb295b.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/cb79ce5d.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9ec3915e.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/a0480db4.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        ss--vh、LIK----AO4、原--特特、159-----775、Sol----Ezra <span
+                            class="am-badge am-badge-success am-radius">40</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=mhLQ...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('58')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/5a1c9c3d.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/bf3c515f.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9f5a6587.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/0c7c549a.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/5fa7549f.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        丁-滚、李-源L、ZYT9-----2826、186-----067、fb--49 <span
+                            class="am-badge am-badge-success am-radius">13</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=hrBO...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('57')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/14e95818.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/f52b401b.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/35c40135.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/197fad6a.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/0ff52c7b.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        亚麻----ooo、xul----e123、gs----shs、全-木马、咱们---爱的 <span class="am-badge am-badge-success am-radius">38</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=nv65...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('56')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/f545f215.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/3d249e48.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/8450bd84.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/0576749f.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/363daeb3.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        xc----101、ho---cv、十年---啦啦、ax--62、187-----110 <span class="am-badge am-badge-success am-radius">41</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=jIGK...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('55')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/85344803.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/5937fb1a.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/64fa4a39.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/2f24ed83.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/ab970e95.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        资源----愉快 <span class="am-badge am-badge-success am-radius">49</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=kV5n...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('54')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/b0365229.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/f867de39.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/41baf94d.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c33bd961.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c0884a82.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        一分----分享 <span class="am-badge am-badge-success am-radius">29</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=qYPv...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('53')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e991f500.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/3d3a8d0d.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/b576c120.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/a02d685b.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9f05d3b6.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        追-忆、被-漫、邪--飞机、菲-世杰、go---001 <span class="am-badge am-badge-success am-radius">9</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=c0f...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('52')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/92e39b06.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e90cbc37.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/639fb65e.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/b9aeaa79.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/5a7e5ccb.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        动----区 <span class="am-badge am-badge-success am-radius">36</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=kVkU...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('51')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/8577b138.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/f8a97c5c.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e92c4d63.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/7f90b07c.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c86cde8e.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        syo----zzs <span class="am-badge am-badge-success am-radius">21</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=dFaX...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('50')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/0cbd6a3b.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9080f93d.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/02527a73.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e5edaaa3.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e0c976bb.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        nie-----4474、辰迷--万代、仅与---余生、dee----hang、热情---007 <span
+                            class="am-badge am-badge-success am-radius">25</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=gePx...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('49')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/cb542320.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/4b640e31.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/737ac83d.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/8bbaac40.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/4c14fc94.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        wan----e399、一路--蜗牛、愿风--08、亚-袋、155-----336 <span
+                            class="am-badge am-badge-success am-radius">44</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=geDm...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('48')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/ead32e0f.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/910bea53.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/d5fe3f5f.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/1e753368.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/7270f997.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        60----926、儒雅--离别、最爱---灰机、炼--fd、八级---505 <span
+                            class="am-badge am-badge-success am-radius">50</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=bo9X...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('47')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/86b0e803.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/19992007.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9e7bff0c.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9a503f48.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e27ad961.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        每----个 <span class="am-badge am-badge-success am-radius">43</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=o7M1...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('46')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/8675fd3f.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/bcc7d842.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/bfb5a34d.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/44a1aa5b.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/fd6bda5b.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        经--话艹、鉁焀--E鈩、神-七奈、77---yyy、旅-火烧 <span class="am-badge am-badge-success am-radius">44</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=jI7r...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('45')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/35ead721.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/73ee3c22.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/98608239.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/da466861.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/35147594.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        c--21、爱一--一課、气温1----6703、asdf-----igvb、我能--饕餮 <span class="am-badge am-badge-success am-radius">39</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=pKRP...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('44')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/ee347600.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/bfdc1302.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/8b4bce47.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/03199059.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e3331ab5.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        J-南拳、len----tan、158-----262、ab---666、楛-久 <span
+                            class="am-badge am-badge-success am-radius">10</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=miOO...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('43')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/6e505c86.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/382960a0.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/bd9709b9.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/2431bdca.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e60dd9ca.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        大f---jc、hm--93、曲-神、mc--------.com、aq--------.com <span
+                            class="am-badge am-badge-success am-radius">26</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=geC6...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">96天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('42')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/2d9c6a12.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/9351463a.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/e38f1141.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c5e8a373.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/22666b82.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        It--__、无-红杏、东海---学院、我-爹h、187-----820 <span class="am-badge am-badge-success am-radius">42</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=dESj...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">testoa</span><span
+                                class="am-badge am-badge-primary am-radius">97天前</span></span>
+                    </td>
+                </tr>
+                <tr onclick="go('37')" style="cursor:pointer">
+                    <td>
+                        <div class="am-u-sm-12" style="margin-top:10px;">
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/dd50171e.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/2d435b67.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/774aeb90.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/7ba3569f.jpg"
+                                 width="30" height="30"/>
+                            <img class="lazy am-img-thumbnail am-radius" style="padding:2px; margin-right:3px;"
+                                 data-original="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/66193cbf.jpg"
+                                 width="30" height="30"/>
+                        </div>
+                    </td>
+                    <td>
+                        希望----谢谢 <span class="am-badge am-badge-success am-radius">42</span><br/>
+                        <span style="color:#999; font-size:12px;">https://pan.baidu.com/mbox/homepage?short=mitF...</span>
+                        <span style="float:right;font-size:12px;"><span
+                                style="color:#999;padding-right:10px;">admin</span><span
+                                class="am-badge am-badge-primary am-radius">97天前</span></span>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="am-u-sm-12" style="line-height:22px; font-size:14px;">
+        <div class="am-g">
+            <div class="am-u-sm-12 am-u-md-12">
+                <p>
+                    绿色框：<span class="am-badge am-badge-success am-radius">群组人数</span>
+                    蓝色框：<span class="am-badge am-badge-primary am-radius">更新时间</span>
+                    如打开百度云群组链接失效或添加失败，请尝试更换全新的百度帐号。</p>
+                <p style="color:#f00;">提示：严禁分享存在违规内容的群组链接，一经发现，一律删除！</p>
+                <p>如你发现或认为某网友分享的群组链接存在违规等内容，请向百度网盘官方网站进行举报。</p>
+                <p>1：百度网盘违规举报：<a target="_blank"
+                                 href="http://tousu.baidu.com/pan/add">http://tousu.baidu.com/pan/add</a></p>
+                <p>2：百度网盘侵权举报：<a target="_blank" href="http://copyright.baidu.com/index.php/index/complaint">http://copyright.baidu.com/index.php/index/complaint</a>
+                </p>
+                <p>3：可联系本站客服邮箱：123@123.cc 提交举报信息，由本站向百度网盘官方提交举报信息，并删除屏蔽群组链接。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="am-margin-top">
+    <hr/>
+    <p class="am-text-center">
+        <small>声明：本站百度云群组链接均由网友自行分享，不存储任何群组资源文件，全部链接均跳转至百度网盘。</small>
+        </br>
+        <small>Copyright ©2017 网盘分享 All Rights Reserved</small>
+    </p>
+
+</footer>
+
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+    <a href="#" title="回到顶部">
+        <span class="am-gotop-title">回到顶部</span>
+        <i class="am-gotop-icon am-icon-chevron-up"></i>
+    </a>
+
+</div>
+<div class="tj"></div>
+<script>
+    $(function () {
+        $("img.lazy").lazyload({
+            effect: "fadeIn"
+        });
+    });
+
+    function go(short) {
+        window.open('?do=jump&short=' + short);
+    }
+</script>
+
+<script>
+    $('#add-share').on('click', function () {
+        $("#post-share-box").css('display', 'block');
+    });
+    $('#post-share').on('click', function () {
+        var short = $.trim($("#post-share-content").val());
+
+        if (short == '') {
+            layer.alert('请输入链接', {icon: 0, title: '提示'}, function (index) {
+                $("#post-share-content").focus(); // 获取焦点
+                layer.close(index);
+            });
+            return false;
+        }
+
+        // ----以行转换成数组
+        short = short.replace(/^\s*[\r\n]/gm, '');
+        short = short.replace(/[ \t\r\f\v]/g, '');
+        var shortArr = short.split('\n');
+        //console.log(shortArr);
+        //alert(shortArr)
+        // ----以行转换成数组 --end
+
+        $.ajax({
+            type: "post",
+            url: "index.php?action=share&do=add",
+            data: "short=" + shortArr,
+            async: false,
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 200) {
+                    if (data.money) {
+                        data.msg = '<span style="font-size:12px;">' + data.msg + '</span> <span class="am-badge am-badge-danger am-radius">金币+' + data.money + '</span><br/>';
+                    }
+
+                    layer.alert(data.msg, {icon: 1, title: '提示'}, function (index) {
+                        layer.close(index);
+                        location.reload();
+                    });
+                    return false;
+                }
+                if (data.status == 202) {
+                    layer.confirm(data.msg, {icon: 0, title: '提示'}, function (index) {
+                        window.location.href = "?action=member&do=login";
+                        layer.close(index);
+                    });
+                }
+            }
+        });
+    });
+
+    function tips_pull() {
+        $.ajax({
+            type: "post",
+            url: "index.php?action=member&do=ajaxloginprize",
+            async: false,
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.msg == 'OK') {
+                    var msg = '<span style="font-size:12px;">每天登录赠送</span> <span class="am-badge am-badge-danger am-radius">金币+3</span><br/>';
+                    layer.alert(msg, {title: '消息提示'}, function (index) {
+                        layer.close(index);
+                    });
+                }
+            }
+        });
+    }
+
+    $(function () {
+        tips_pull();
+    });
+</script>
+</body>
+</html>
