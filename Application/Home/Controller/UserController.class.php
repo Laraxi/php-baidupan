@@ -30,10 +30,7 @@ class UserController extends Controller
         } else {
             $this->display();
         }
-
     }
-
-
     public function register()
     {
         if ($_POST) {
@@ -63,7 +60,6 @@ class UserController extends Controller
             $this->display();
         }
     }
-
 
     public function logout()
     {

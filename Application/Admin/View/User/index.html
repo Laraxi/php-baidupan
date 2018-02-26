@@ -1,0 +1,59 @@
+<extend name="common:master"/>
+
+<block name="main">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <a href="<?= U('add') ?>" class="btn btn-success">新增</a>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>序号</th>
+                            <th>会员名</th>
+                            <th>性别</th>
+                            <th>状态</th>
+                            <th>登录时间</th>
+                            <th>注册时间</th>
+                            <th>操作</th>
+                        </tr>
+
+                        <?php foreach($data as $value): ?>
+                        <tr>
+                            <td><?= $value['id'] ?></td>
+                            <td><?= $value['username'] ?></td>
+                            <td><?= $value['sex']== 0 ? '男' : '女' ?></td>
+                            <td><?= $value['status'] == 1  ? '正常':'关闭' ?></td>
+                            <td><?= date('Y-m-d H:i:s', $value['login_time']) ?></td>
+                            <td><?= date('Y-m-d H:i:s', $value['reg_time']) ?></td>
+                            <td>
+                                <a class="btn btn-info" href="<?= U('edit',['id'=>$value['id']]) ?>">编辑</a>
+                                <a class="btn btn-info" href="<?= U('del',['id'=>$value['id']]) ?>">删除</a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+                <style>
+                    .box-footer .current {
+                        padding: 5px;
+                        margin: 10px;
+                        background: #0b93d5;
+                        color: white;
+                    }
+                </style>
+                <div class="box-footer clearfix">
+                    <?= $show ?>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</block>
+
+
+

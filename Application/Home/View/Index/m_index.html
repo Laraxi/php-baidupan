@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="__PUBLIC__/index/css/amazeui.min.css">
+    <script src="__PUBLIC__/index/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/index/js/amazeui.min.js"></script>
+    <script src="__PUBLIC__/index/js/layer.min.js"></script>
+</head>
+<body>
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<style>
+    a {
+        color: #333333
+    }
+
+    .login-status {
+        color: #333333;
+        font-size: 14px;
+        padding-top: 20px;
+    }
+
+    .login-status a {
+        color: #333333;
+    }
+
+    #post-share-box {
+        display: none;
+    }
+
+    #notice {
+        margin: 10px 12px 0 12px;
+        padding: 6px;
+        font-size: 0;
+        overflow: hidden;
+        background: #DC514C;
+    }
+
+    #notice i {
+        display: inline-block;
+        vertical-align: top;
+        height: 24px;
+        line-height: 24px;
+        font-size: 14px;
+    }
+
+    #notice marquee {
+        display: inline-block;
+        height: 24px;
+        line-height: 24px;
+        font-size: 14px;
+        margin-left: 6px;
+        margin-right: 12px;
+    }
+</style>
+
+<style>
+    .tishi-i p{line-height:14px;padding-top:0px;font-size:12px;}
+    .tishi-i-cg p{line-height:10px;padding-top:0px;font-size:12px;}
+    .tishi-i i{font-style:normal;font-weight:bold;}
+    .tishi-i .f-red{color:#f00;}
+</style>
+
+<header class="am-topbar am-topbar-inverse" style="background:#FFF; border-bottom:1px solid #eee; height:65px;">
+    <div class="am-container am-g-fixed">
+        <h1 class="am-topbar-brand" style="margin:0;padding:0;width:100%;">
+            <a href="/" class="am-text-ir"><img src="__PUBLIC__/index/images/logo.jpg" border="0" style="width:100%;">009网盘
+                - 百度云盘群组分享</a>
+        </h1>
+    </div>
+
+</header>
+<div class="am-g am-g-fixed">
+    <div class="am-u-sm-12" style="margin-top:-30px;font-size:12px;">
+        <div class="login-status" style="margin-bottom:5px;">
+            <?php if(session('home_login_id')): ?>
+            <a>欢迎你：<span style="color: red"><?= session('home_login_username') ?></span> </a>
+            <a href="<?= U('user/logout') ?>" class="am-icon-sign-in"> 退出</a>
+            <?php else: ?>
+            <span style="padding-right:5px;"> 登录免费分享群组链接，马上只需1秒!  </span>
+            <a target="_blank" href="<?= U('user/register') ?>" class="am-icon-sign-in"> 注册</a>
+            <a target="_blank" href="<?= U('user/login') ?>" class="am-icon-sign-in"> 登录</a>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div id="notice" class="am-btn am-btn-warning am-radius"><i class="am-icon-chevron-circle-right"></i>
+        <marquee scrollamount="3">
+            公告：请记住本站唯一网址：www.009wp.com。本站严禁分享存在违规内容的群组链接，一经发现，一律删除！点击下方免费发布链接可获取Z币。升级VIP会员免费无限制浏览本站资源，欢迎体验强大的VIP会员！由于在线人数较多，如提示“获取群组信息失败”请尝试点击最新/人数较少的群组链接。
+        </marquee>
+    </div>
+    <div class="am-u-sm-12" style="margin:10px 0px; font-size:12px;">
+        <button type="button" id="add-share" class="am-btn am-btn-warning am-radius" style="width:100%;"><i
+                class="am-icon-share-alt-square"></i> 免费快速分享百度云群组链接
+        </button>
+    </div>
+
+
+    <div class="am-u-sm-12" id="post-share-box">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd">
+                <h3 class="am-panel-title">免费分享百度群组链接，获取Z币！</h3>
+            </div>
+            <form class="am-form">
+                <fieldset>
+                    <div class="am-form-group" style="margin-top: 0px;">
+                        <label for="doc-ta-1" style="font-size:14px;">请粘贴有效的百度云群组链接，可分享你自己创建或其它群的邀请链接</label><br>
+                        <label for="doc-ta-1"
+                               style="font-size:14px;color:#f00;">声明：严禁分享存在违规内容的百度网盘群组链接，一经发现，一律删除！</label>
+                        <textarea class="" rows="8" id="post-share-content"
+                                  placeholder="请粘贴完整的百度群组链接，例如：https://pan.baidu.com/mbox/homepage?short=... 可一次分享多个链接，每行占一个。"></textarea>
+                    </div>
+                    <p style="margin:-10px 0px; font-size:12px; color:#999;">成功分享一个有效的链接，系统赠送 <span
+                            class="am-badge am-badge-danger am-radius">2</span> 个Z币。</p>
+                    <p style="margin-bottom:-15px;">
+                        <button type="button" id="post-share" class="am-btn am-btn-warning am-radius">提交分享</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $('#add-share').on('click', function () {
+            $("#post-share-box").css('display', 'block');
+        });
+        $('#post-share').on('click', function () {
+            var short = $.trim($("#post-share-content").val());
+
+            if (short == '') {
+                layer.alert('请输入链接', {icon: 0, title: '提示'}, function (index) {
+                    $("#post-share-content").focus(); // 获取焦点
+                    layer.close(index);
+                });
+                return false;
+            }
+
+            // ----以行转换成数组
+            short = short.replace(/^\s*[\r\n]/gm, '');
+            short = short.replace(/[ \t\r\f\v]/g, '');
+            var shortArr = short.split('\n');
+            //console.log(shortArr);
+            //alert(shortArr)
+            // ----以行转换成数组 --end
+
+            $.ajax({
+                type: "post",
+                url: "<?= U('share/add') ?>",
+                data: "short=" + shortArr,
+                async: false,
+                cache: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 200) {
+                        layer.alert(data.msg, {icon: 1, title: '提示'}, function (index) {
+                            layer.close(index);
+                            location.reload();
+                        });
+                        return false;
+                    } else {
+                        layer.alert(data.msg, {icon: 1, title: '提示'}, function (index) {
+                            layer.close(index);
+                        });
+                        return false;
+                    }
+                    if (data.status == 202) {
+                        layer.confirm(data.msg, {icon: 0, title: '提示'}, function (index) {
+                            window.location.href = "<?= U('user/login') ?>";
+                            layer.close(index);
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+
+    <div class="am-u-sm-12">
+        <div class="am-alert am-alert-secondary tishi-i">
+            <p>问题1：加入群组，提示 <span class="f-red">群组人数已满、该邀请链接失效、获取群组信息失败？</span>
+                解决1：请刷新网站首页，选择首页显示最新分享的群组链接点击跳转，多尝试几个。</p>
+            <p style="margin-top:-10px;">问题2：加入群组，提示 <i class="f-red">添加失败了，稍后重试一下？</i>
+                解决2：这种情况通常是因为百度网盘帐号被暂时限制了加群功能，请尝试<i class="f-red">更换浏览器、更换网络、注册一个全新的百度帐号并登录</i>。如还不能解决，请尝试使用电脑或请稍等6小时左右再尝试加群。</p>
+            <p style="margin-top:-10px;">问题3：加入群组，手机提示需要下载百度网盘APP？
+                解决3：如你手机已安装百度网盘APP，无需再下载，请尝试更换浏览器、百度浏览器、UC浏览器、QQ浏览器、手机默认的浏览器。</p>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd" style="border-bottom:none;">
+                <h3 class="am-panel-title">最新百度云群组<span style="font-size:11px;">(<i class="am-icon-bar-chart"></i> 群组链接:<b><?= $count ?></b> 条)</span>
+                </h3>
+            </div>
+            <table class="am-table am-table-striped am-table-hover">
+                <thead>
+                <!--tr>
+                    <th></th>
+                    <th></th>
+                </tr-->
+                </thead>
+                <tbody>
+                <?php foreach($data as $key=>$value): ?>
+                <tr onclick="go('<?= $value["sl_id"] ?>')" style="cursor:pointer" style="font-size:12px;">
+                    <td>
+                        <span style="font-size:12px;"><span
+                                class="am-badge am-badge-primary am-radius"><?= date('Y-m-d',$value['create_time']) ?></span> <?= $value['name'] ?>
+                            <span
+                                    class="am-badge am-badge-success am-radius"><?= $value['number'] ?></span><br>
+                        <span style="color:#999; font-size:12px;"><?= $value['link'] ?></span>
+                        </span></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="am-u-sm-12" style=" font-size:14px;">
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-12">
+            <p>
+                绿色框：<span class="am-badge am-badge-success am-radius">群组人数</span>
+                蓝色框：<span class="am-badge am-badge-primary am-radius">更新时间</span>
+                如打开百度云群组链接失效或添加失败，请尝试更换全新的百度帐号。</p>
+            <p style="color:#f00;">提示：严禁分享存在违规内容的群组链接，一经发现，一律删除！</p>
+            <p>如你发现或认为某网友在群组中分享的文件存在违规内容，请向百度网盘官方网站进行举报。</p>
+            <p>1：百度网盘违规举报：<a target="_blank" href="http://tousu.baidu.com/pan/add">http://tousu.baidu.com/pan/add</a>
+            </p>
+            <p>2：百度网盘侵权举报：<a target="_blank" href="http://copyright.baidu.com/index.php/index/complaint">http://copyright.baidu.com/index.php/index/complaint</a>
+            </p>
+            <p>3：可联系本站客服邮箱：s009wp@163.com 提交举报信息，由本站向百度网盘官方提交举报信息，并删除屏蔽群组链接。</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    footer a {
+        color: #333;
+    }
+
+    .tj {
+        display: none;
+    }
+</style>
+<footer class="am-margin-top">
+    <hr>
+    <p class="am-text-center">
+        <small>声明：本站百度云群组链接均由网友自行分享，不存储任何群组资源文件，全部链接均跳转至百度网盘。</small>
+        <br>
+        <small>Copyright ©2018 009网盘 009wp.com All Rights Reserved
+            <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备17127804号-1</a></small>
+    </p>
+</footer>
+
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed am-no-layout">
+    <a href="#" title="回到顶部">
+        <span class="am-gotop-title">回到顶部</span>
+        <i class="am-gotop-icon am-icon-chevron-up"></i>
+    </a>
+</div>
+<div class="tj"></div>
+<script>
+    function go(short) {
+        window.location.href = '<?= U("share/jump") ?>' +'/'+ short;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<extend name="common:master"/>
+
+<block name="main">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <!-- /.box -->
+            <!-- general form elements disabled -->
+            <div class="box box-warning">
+                <a href="<?= U('index') ?>" class="btn btn-info">返回列表</a>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form role="form" method="post" action="<?= U('edit') ?>" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $info['id'] ?>">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <input type="text" class="form-control " placeholder="请输入用户名" name="username"
+                                   value="<?= $info['username'] ?>">
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="password" class="form-control " placeholder="请输入密码" name="password"
+                                   value="<?= $password  ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control " placeholder="请输入确认密码" name="re_password"
+                                   value="<?= $password ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="提交">
+                        </div>
+
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</block>
